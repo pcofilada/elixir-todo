@@ -18,4 +18,10 @@ defmodule Todo.SessionController do
         |> render("new.html")
     end
   end
+
+  def delete(conn, _params) do
+    Guardian.Plug.sign_out(conn)
+    |> put_flash(:info, "Logged out successfully.")
+    |> redirect(to: "/")
+  end
 end
